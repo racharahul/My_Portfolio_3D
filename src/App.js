@@ -10,6 +10,7 @@ import About from './pages/About'
 import Skills from './pages/Skills'
 import Projects from './pages/Projects'
 import Contact from './pages/Contact'
+import Home from './pages/Home'
 
 // Import layout component
 import Layout from './components/Layout'
@@ -61,6 +62,7 @@ function Word({ children, path, navigate, ...props }) {
 function Cloud({ count = 8, radius = 20, navigate }) {
   // Define navigation words and their paths
   const navWords = [
+    { text: 'Home', path: '/home' },
     { text: 'About', path: '/about' },
     { text: 'Skills', path: '/skills' },
     { text: 'Projects', path: '/projects' },
@@ -137,6 +139,7 @@ function AppContent() {
 
       {/* Routes are rendered on top of the 3D scene */}
       <Routes>
+        <Route path="/home" element={<Layout><Home /></Layout>} />
         <Route path="/about" element={<Layout><About /></Layout>} />
         <Route path="/skills" element={<Layout><Skills /></Layout>} />
         <Route path="/projects" element={<Layout><Projects /></Layout>} />
