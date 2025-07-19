@@ -2,16 +2,14 @@
 
 This project is a modern, visually engaging personal portfolio built with React, Three.js, and React Three Fiber. It features an interactive 3D word cloud for navigation, a bold hero section with a background image, and a responsive, professional design.
 
-## Project Status
+## Project Overview
 
-**Current Stage:** In Development
+This is a modern, visually engaging personal portfolio built with React, Three.js, and React Three Fiber. The project features an interactive 3D word cloud for navigation, and a responsive, professional design.
 
-The portfolio is fully functional with a unique 3D navigation experience, dynamic content, and a polished UI. Recent improvements include a left-aligned hero section with direct text on the background image, a fixed minimized 3D navigation model, and enhanced responsiveness.
-
-## Features
+## Key Features
 
 - **Interactive 3D Navigation:** A spherical word cloud powered by Three.js and React Three Fiber, allowing users to explore portfolio sections in an immersive way.
-- **Fixed Minimized 3D Model:** When navigating away from the home page, the 3D scene minimizes to a fixed circular icon in the corner, remaining visible and accessible while scrolling.
+- **Fixed Minimized 3D Model:** When navigating away from the landing page, the 3D scene minimizes to a fixed circular icon in the corner, remaining visible and accessible while scrolling.
 - **Bold Hero Section:** The landing page features a large background image with prominent, shadowed text and a clear call-to-action, providing an epic first impression.
 - **Sectioned Info Cards:** Below the hero, three cards highlight web development, 3D/interactive, and DevOps skills, each with icons and links.
 - **Responsive Design:** The layout adapts seamlessly to all device sizes.
@@ -25,6 +23,15 @@ The portfolio is fully functional with a unique 3D navigation experience, dynami
 - **React Three Drei**
 - **React Router**
 - **Modern CSS**
+
+## Navigation System
+
+The navigation system is the most crucial part of this project. It requires a deep understanding of:
+
+- How routes are defined and managed using React Router
+- How transitions work between pages
+- How the 3D navigation model integrates with the rest of the app
+- How the minimized state of the 3D model is handled when navigating away from the landing page
 
 ## Getting Started
 
@@ -51,16 +58,87 @@ To run the project locally:
 
 ## Recent Updates
 
+- Fixed 3D model positioning: now properly fixed in bottom-right corner when minimized
+- Implemented comprehensive inline styling for the 3D scene container
+- Added hover effects and responsive sizing for the minimized 3D model
+- Improved z-index handling to ensure the 3D model stays on top of other elements
 - Hero section redesigned: left-aligned, direct text on image, improved readability
-- Minimized 3D navigation now fixed in the corner during scroll
 - Enhanced responsiveness and visual polish across all sections
 - Updated feature cards and navigation links
+- Improved Contact page with vertically aligned social media links including both icons and text
+- Fixed Projects page layout by correcting class naming inconsistencies and restructuring HTML
+- Removed "Other Noteworthy Projects" section from Projects page for a cleaner layout
+- Updated GitHub link for the "3D Interactive Portfolio" project
+- Enhanced project descriptions and technology lists
+- Redesigned project cards with full-width banner images
+- Added semi-transparent overlay and blend modes to project images for better visual integration
+- Reorganized project content flow for improved readability
 
 ## Future Plans
 
 - Add more projects and detailed content
 - Introduce additional animations and transitions
 - Further optimize 3D performance
+
+## Project Structure
+
+The project has six implemented pages:
+
+1. Landing Page - http://localhost:3000/ (Interactive 3D word cloud navigation)
+2. Home Page - http://localhost:3000/home (Main portfolio overview)
+3. About Page - http://localhost:3000/about (Personal information and skills)
+4. Contact Page - http://localhost:3000/contact (Contact form and social media links)
+5. Projects Page - http://localhost:3000/projects (Featured projects with descriptions)
+6. Skills Page - http://localhost:3000/skills (Detailed skills breakdown by category)
+
+## AI Assistant Prompt
+
+Below is a comprehensive prompt that can be used when working with AI assistants on this project:
+
+```
+Before we proceed further, please take the time to thoroughly understand the current codebase. This is a modern, visually engaging personal portfolio built with React, Three.js, and React Three Fiber. The project features an interactive 3D word cloud for navigation, and a responsive, professional design.
+
+## Project Structure
+
+The project has six implemented pages:
+
+1. Landing Page - http://localhost:3000/ (Interactive 3D word cloud navigation)
+2. Home Page - http://localhost:3000/home (Main portfolio overview)
+3. About Page - http://localhost:3000/about (Personal information and skills)
+4. Contact Page - http://localhost:3000/contact (Contact form and social media links)
+5. Projects Page - http://localhost:3000/projects (Featured projects with descriptions)
+6. Skills Page - http://localhost:3000/skills (Detailed skills breakdown by category)
+
+## Key Features
+
+- Interactive 3D Navigation: A spherical word cloud powered by Three.js and React Three Fiber, allowing users to explore portfolio sections in an immersive way.
+- Fixed Minimized 3D Model: When navigating away from the landing page, the 3D scene minimizes to a fixed circular icon in the corner, remaining visible and accessible while scrolling.
+- Sectioned Info Cards: Below the hero, three cards highlight web development, 3D/interactive, and DevOps skills, each with icons and links.
+- Responsive Design: The layout adapts seamlessly to all device sizes.
+- Dynamic Routing: Navigation between pages is handled smoothly with React Router, without full page reloads.
+- Project Cards: Featured projects are displayed with full-width banner images, descriptions, and links to GitHub and live demos.
+
+## Recent Updates
+
+- Improved Contact page with vertically aligned social media links including both icons and text
+- Fixed Projects page layout by correcting class naming inconsistencies and restructuring HTML
+- Removed "Other Noteworthy Projects" section from Projects page for a cleaner layout
+- Updated GitHub link for the "3D Interactive Portfolio" project
+- Enhanced project descriptions and technology lists
+- Redesigned project cards with full-width banner images
+- Added semi-transparent overlay and blend modes to project images for better visual integration
+
+## Navigation System
+
+The navigation system is the most crucial part of this project. It requires a deep understanding of:
+
+- How routes are defined and managed using React Router
+- How transitions work between pages
+- How the 3D navigation model integrates with the rest of the app
+- How the minimized state of the 3D model is handled when navigating away from the landing page
+
+Before proceeding with any improvements, a thorough understanding of the current codebase is essential, including running the project locally and exploring all pages, styles, and implementations to see how everything works together.
+```
 
 ## Contributing
 

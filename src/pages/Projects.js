@@ -1,68 +1,91 @@
 import React from 'react';
 
 const Projects = () => {
-  const projects = [
+  const featuredProjects = [
     {
       id: 1,
       title: '3D Interactive Portfolio',
-      description: 'A unique portfolio website featuring an interactive 3D word cloud for navigation, built with React and Three.js.',
-      technologies: ['React', 'Three.js', 'React Three Fiber', 'CSS3'],
-      image: 'project1.jpg', // You would add actual images later
-      link: '#'
+      description: 'A unique portfolio website featuring an interactive 3D word cloud for navigation. This project showcases advanced Three.js integration with React to create an immersive user experience that stands out from traditional portfolio sites. The 3D scene minimizes to a circular icon when navigating to content pages, providing a seamless and engaging user experience.',
+      technologies: ['React', 'Three.js', 'React Three Fiber', 'React Three Drei', 'React Router', 'CSS3'],
+      github: 'https://github.com/racharahul/My_Portfolio_3D',
+      external: '#',
+      featured: true
     },
     {
       id: 2,
       title: 'Containerized Microservices API',
-      description: 'A scalable backend system built with containerized microservices architecture for high availability and easy deployment.',
+      description: 'A scalable backend system built with containerized microservices architecture for high availability and easy deployment. This project implements best practices for service isolation, API gateway patterns, and automated scaling.',
       technologies: ['Python', 'Docker', 'RESTful APIs', 'MySQL', 'CI/CD Pipeline'],
-      image: 'project2.jpg',
-      link: '#'
+      github: 'https://github.com/username/microservices-api',
+      external: '#',
+      featured: true
     },
-    {
-      id: 3,
-      title: 'DevOps Automation Suite',
-      description: 'A collection of tools and scripts for automating deployment workflows, monitoring, and infrastructure management.',
-      technologies: ['Python', 'Bash', 'Docker', 'GitHub Actions', 'Cloud Services'],
-      image: 'project3.jpg',
-      link: '#'
-    },
-    {
-      id: 4,
-      title: 'Real-time Data Dashboard',
-      description: 'An interactive dashboard for visualizing and analyzing real-time data streams with customizable widgets and alerts.',
-      technologies: ['React.js', 'Node.js', 'WebSockets', 'Chart.js', 'Bootstrap'],
-      image: 'project4.jpg',
-      link: '#'
-    }
   ];
+  
+  // Featured projects only
 
   return (
-    <div className="page-content">
-      <h1>Projects</h1>
-      <p>Here are some of the projects I've worked on:</p>
+    <div className="page-content projects-content">
+      <div className="section-heading">
+        <h2>Projects</h2>
+      </div>
       
-      <div className="projects-container">
-        {projects.map(project => (
-          <div key={project.id} className="project-card">
-            <div className="project-image">
-              {/* In a real application, you would use actual images */}
-              <div className="placeholder-image">{project.title[0]}</div>
+      <div className="projects-intro">
+        <h1>Things I've Built</h1>
+        <p>A selection of projects I've worked on, from web applications to backend systems and DevOps solutions.</p>
+      </div>
+      
+      {/* Featured Projects */}
+      <div className="featured-projects">
+        {featuredProjects.map((project, index) => (
+          <div key={project.id} className="featured-project" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <div style={{ 
+              width: '100%', 
+              height: '300px', 
+              backgroundImage: 'url("/3d words.png")', 
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              borderRadius: 'var(--border-radius)',
+              boxShadow: 'var(--shadow-md)',
+              marginBottom: '30px',
+              opacity: '0.85',
+              backgroundColor: 'var(--color-navy-light)',
+              mixBlendMode: 'luminosity',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'var(--color-navy)',
+                opacity: '0.2',
+                borderRadius: 'var(--border-radius)'
+              }}></div>
             </div>
-            <div className="project-details">
-              <h2>{project.title}</h2>
-              <p>{project.description}</p>
-              <div className="project-tech">
-                {project.technologies.map((tech, index) => (
-                  <span key={index} className="tech-tag">{tech}</span>
-                ))}
+            <div style={{ width: '100%' }}>
+              <p className="featured-project-overline">Featured Project</p>
+              <h3 className="featured-project-title">{project.title}</h3>
+              <div className="featured-project-description">
+                <p>{project.description}</p>
               </div>
-              <a href={project.link} className="project-link" target="_blank" rel="noopener noreferrer">
-                View Project
-              </a>
+              <div className="featured-project-links" style={{ marginTop: '20px' }}>
+                <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+                  <i className="fab fa-github" style={{ marginRight: '8px' }}></i>
+                  <span>GitHub</span>
+                </a>
+                <a href={project.external} target="_blank" rel="noopener noreferrer" aria-label="Live Demo" style={{ display: 'flex', alignItems: 'center' }}>
+                  <i className="fas fa-external-link-alt" style={{ marginRight: '8px' }}></i>
+                  <span>Live Demo</span>
+                </a>
+              </div>
             </div>
           </div>
         ))}
       </div>
+      
+      {/* End of Featured Projects */}
     </div>
   );
 };
