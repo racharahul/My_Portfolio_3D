@@ -48,7 +48,7 @@ function Word({ children, path, navigate, ...props }) {
     const distance = worldPosition.distanceTo(camera.position)
     const scale = 1 + (10 / distance) // Adjust this formula as needed
 
-    ref.current.material.color.lerp(color.set(hovered ? '#fa2720' : '#ffffff'), 0.1)
+    ref.current.material.color.lerp(color.set(hovered ? '#64ffda' : '#ccd6f6'), 0.1)
     ref.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.1)
   })
 
@@ -105,13 +105,61 @@ function Scene({ navigate, isMinimized, setIsMinimized }) {
     }
   };
 
+  // Use useState and useEffect for hover state
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Get window width for responsive styling
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  // Define styles based on minimized state, hover state, and window width
+  const containerStyle = isMinimized ? {
+    position: 'fixed',
+    width: windowWidth <= 768 ? '100px' : '150px',
+    height: windowWidth <= 768 ? '100px' : '150px',
+    bottom: windowWidth <= 768 ? '20px' : '30px',
+    right: windowWidth <= 768 ? '20px' : '30px',
+    top: 'auto',
+    left: 'auto',
+    borderRadius: '50%',
+    boxShadow: isHovered 
+      ? '0 0 20px 8px rgba(100, 255, 218, 0.25)' 
+      : '0 0 15px 5px rgba(100, 255, 218, 0.15)',
+    background: 'var(--color-navy-light)',
+    zIndex: 9999, // Ensure it's on top of everything
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    transform: isHovered ? 'scale(1.05)' : 'none',
+    transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)'
+  } : {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    zIndex: 10,
+    transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+    pointerEvents: 'auto'
+  };
+
   return (
     <div 
-      className={`scene-container ${isMinimized ? 'minimized' : ''}`}
+      className="scene-container"
       onClick={handleSceneClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={containerStyle}
     >
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
-        <fog attach="fog" args={['#202025', 0, 80]} />
+        <fog attach="fog" args={['#0a192f', 0, 80]} />
         <Suspense fallback={null}>
           <group rotation={[10, 10.5, 10]}>
             <Cloud count={8} radius={20} navigate={navigate} />
@@ -135,16 +183,19 @@ function AppContent() {
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+      {/* Render the 3D scene */}
       <Scene navigate={navigate} isMinimized={isMinimized} setIsMinimized={setIsMinimized} />
 
-      {/* Routes are rendered on top of the 3D scene */}
-      <Routes>
-        <Route path="/home" element={<Layout><Home /></Layout>} />
-        <Route path="/about" element={<Layout><About /></Layout>} />
-        <Route path="/skills" element={<Layout><Skills /></Layout>} />
-        <Route path="/projects" element={<Layout><Projects /></Layout>} />
-        <Route path="/contact" element={<Layout><Contact /></Layout>} />
-      </Routes>
+      {/* Only render content for non-root routes */}
+      {location.pathname !== '/' && (
+        <Routes>
+          <Route path="/home" element={<Layout><Home /></Layout>} />
+          <Route path="/about" element={<Layout><About /></Layout>} />
+          <Route path="/skills" element={<Layout><Skills /></Layout>} />
+          <Route path="/projects" element={<Layout><Projects /></Layout>} />
+          <Route path="/contact" element={<Layout><Contact /></Layout>} />
+        </Routes>
+      )}
     </div>
   )
 }

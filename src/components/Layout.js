@@ -13,7 +13,6 @@ const Layout = ({ children }) => {
 
   return (
     <div className="layout">
-
       <div className="content-container">
         {children}
       </div>
