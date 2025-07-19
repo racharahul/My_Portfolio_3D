@@ -8,7 +8,7 @@ const Projects = () => {
       description: 'A unique portfolio website featuring an interactive 3D word cloud for navigation. This project showcases advanced Three.js integration with React to create an immersive user experience that stands out from traditional portfolio sites. The 3D scene minimizes to a circular icon when navigating to content pages, providing a seamless and engaging user experience.',
       technologies: ['React', 'Three.js', 'React Three Fiber', 'React Three Drei', 'React Router', 'CSS3'],
       github: 'https://github.com/racharahul/My_Portfolio_3D',
-      external: '#',
+      external: 'https://my-portfolio-olive-sigma-41.vercel.app/',
       featured: true
     },
     {
