@@ -58,6 +58,19 @@ To run the project locally:
 
 ## Recent Updates
 
+### July 2025 Updates
+- Fixed Vercel build failure (error code 126):
+  - Added missing `manifest.json` and `favicon.ico` files to the public directory
+  - Updated navigation approach in `MobileEnhancer.js` to use History API instead of direct location changes
+  - Added configuration files (`.nvmrc`, `.npmrc`, `.env`, `.env.production`, `.vercelignore`)
+  - Updated Vercel configuration in `vercel.json` for more reliable builds
+  - Improved compatibility with React Router for better navigation
+- Enhanced navigation system for better cross-device experience:
+  - Modified click and touch handlers to ensure consistent behavior
+  - Updated `Scene` component to allow clicks anywhere on the minimized 3D model to navigate to home
+  - Improved mobile touch interaction for the 3D model
+
+### Previous Updates
 - Added mobile-specific enhancements for 3D portfolio navigation:
   - Created mobile-specific enhancement components for touch interaction
   - Improved touch event handling for better mobile navigation
