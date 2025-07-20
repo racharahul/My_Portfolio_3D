@@ -40,6 +40,16 @@ function Word({ children, path, navigate, ...props }) {
       }
     }
   };
+  
+  // Handle touch events specifically for mobile
+  const handleTouch = (e) => {
+    e.stopPropagation(); // Prevent event from bubbling up
+    setHovered(true); // Set hover state for visual feedback
+    handleClick(); // Trigger the click handler
+    
+    // Reset hover state after a delay
+    setTimeout(() => setHovered(false), 300);
+  };
 
   // Tie component to the render-loop
   useFrame(({ camera }) => {
@@ -54,7 +64,16 @@ function Word({ children, path, navigate, ...props }) {
 
   return (
     <Billboard {...props}>
-      <Text ref={ref} onPointerOver={over} onPointerOut={out} onClick={handleClick} {...fontProps} children={children} />
+      <Text 
+        ref={ref} 
+        onPointerOver={over} 
+        onPointerOut={out} 
+        onClick={handleClick}
+        onTouchStart={handleTouch} // Add touch event handler
+        onTouchEnd={(e) => e.stopPropagation()} // Prevent conflicts with TrackballControls
+        {...fontProps} 
+        children={children} 
+      />
     </Billboard>
   )
 }
@@ -98,8 +117,19 @@ function Cloud({ count = 8, radius = 20, navigate }) {
 
 // Wrapper component for the 3D scene
 function Scene({ navigate, isMinimized, setIsMinimized }) {
-  const handleSceneClick = () => {
-    if (isMinimized) {
+  const handleSceneClick = (e) => {
+    // Only handle clicks on the container itself, not on child elements
+    if (e.target === e.currentTarget && isMinimized) {
+      setIsMinimized(false);
+      navigate('/'); // Navigate back to home to see the full 3D view
+    }
+  };
+  
+  // Handle touch events specifically for mobile
+  const handleSceneTouch = (e) => {
+    // Only handle touches on the container itself, not on child elements
+    if (e.target === e.currentTarget && isMinimized) {
+      e.stopPropagation(); // Prevent event from bubbling
       setIsMinimized(false);
       navigate('/'); // Navigate back to home to see the full 3D view
     }
@@ -154,9 +184,12 @@ function Scene({ navigate, isMinimized, setIsMinimized }) {
     <div 
       className="scene-container"
       onClick={handleSceneClick}
+      onTouchStart={handleSceneTouch}
+      onTouchEnd={(e) => e.stopPropagation()}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={containerStyle}
+      data-is-minimized={isMinimized ? 'true' : 'false'} // Add data attribute for CSS targeting
     >
       <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 35], fov: 90 }}>
         <fog attach="fog" args={['#0a192f', 0, 80]} />
@@ -165,7 +198,17 @@ function Scene({ navigate, isMinimized, setIsMinimized }) {
             <Cloud count={8} radius={20} navigate={navigate} />
           </group>
         </Suspense>
-        <TrackballControls />
+        <TrackballControls 
+          // Configure TrackballControls to work better with touch events
+          noZoom={false}
+          noPan={false}
+          dynamicDampingFactor={0.15}
+          rotateSpeed={1.5}
+          maxDistance={80}
+          minDistance={20}
+          // Add className for CSS targeting
+          className="trackball-controls"
+        />
       </Canvas>
     </div>
   );
@@ -200,11 +243,16 @@ function AppContent() {
   )
 }
 
+// Import MobileEnhancer component
+import MobileEnhancer from './components/MobileEnhancer';
+import './components/MobileEnhancer.css';
+
 // Main App component with routing
 export default function App() {
   return (
     <Router>
       <AppContent />
+      <MobileEnhancer /> {/* This component only applies enhancements on mobile devices */}
     </Router>
   )
 }

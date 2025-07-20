@@ -1,0 +1,70 @@
+/* Mobile-specific enhancements that only apply on mobile devices */
+
+/* Only apply these styles on mobile devices */
+@media (max-width: 768px) {
+  /* Increase the touch target size for better mobile interaction */
+  .scene-container {
+    touch-action: manipulation;
+    touch-action: none; /* Prevent browser handling of touch gestures */
+  }
+  
+  /* Ensure the minimized 3D model is interactive on mobile */
+  .scene-container[data-is-minimized="true"] {
+    pointer-events: auto !important;
+    z-index: 9999 !important;
+    /* Add a subtle glow to indicate interactivity */
+    box-shadow: 0 0 15px rgba(100, 255, 218, 0.5);
+    cursor: pointer !important;
+  }
+  
+  /* Improve touch feedback */
+  text {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+    touch-action: none;
+  }
+  
+  /* Prevent TrackballControls from consuming all touch events */
+  .trackball-controls {
+    touch-action: pan-x pan-y;
+    pointer-events: auto;
+  }
+  
+  /* Ensure canvas doesn't interfere with touch events */
+  canvas {
+    touch-action: none;
+  }
+  
+  /* Add active state for touch feedback */
+  text:active {
+    fill: #64ffda !important;
+  }
+  
+  /* Enhance the pulse animation for better visibility on mobile */
+  @keyframes mobile-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(100, 255, 218, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(100, 255, 218, 0);
+    }
+  }
+  
+  /* Apply the enhanced pulse animation to the minimized scene container */
+  .scene-container[data-is-minimized="true"]:not(:hover) {
+    animation: mobile-pulse 2s infinite ease-in-out;
+  }
+}
+
+/* Custom class added by MobileEnhancer.js */
+.touch-enhancer {
+  cursor: pointer;
+  pointer-events: auto;
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 0;
+  touch-action: none;
+}
