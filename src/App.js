@@ -32,6 +32,16 @@ function Word({ children, path, navigate, ...props }) {
 
   // Handle navigation using the passed navigate function
   const handleClick = () => {
+    // Get the current location to check if we're on a content page
+    const isMinimized = document.querySelector('.scene-container[data-is-minimized="true"]');
+    
+    // If the 3D model is minimized, always navigate to the landing page
+    if (isMinimized) {
+      navigate('/');
+      return;
+    }
+    
+    // Normal navigation when on landing page
     if (path) {
       if (path.startsWith('http://') || path.startsWith('https://')) {
         window.open(path, '_blank');
@@ -45,7 +55,23 @@ function Word({ children, path, navigate, ...props }) {
   const handleTouch = (e) => {
     e.stopPropagation(); // Prevent event from bubbling up
     setHovered(true); // Set hover state for visual feedback
-    handleClick(); // Trigger the click handler
+    
+    // Get the current state of the 3D model
+    const isMinimized = document.querySelector('.scene-container[data-is-minimized="true"]');
+    
+    // If the 3D model is minimized, always navigate to the landing page
+    if (isMinimized) {
+      navigate('/');
+    } else {
+      // Normal navigation when on landing page
+      if (path) {
+        if (path.startsWith('http://') || path.startsWith('https://')) {
+          window.open(path, '_blank');
+        } else {
+          navigate(path);
+        }
+      }
+    }
     
     // Reset hover state after a delay
     setTimeout(() => setHovered(false), 300);
@@ -118,20 +144,24 @@ function Cloud({ count = 8, radius = 20, navigate }) {
 // Wrapper component for the 3D scene
 function Scene({ navigate, isMinimized, setIsMinimized }) {
   const handleSceneClick = (e) => {
-    // Only handle clicks on the container itself, not on child elements
-    if (e.target === e.currentTarget && isMinimized) {
+    if (isMinimized) {
+      // When minimized, any click on the scene or its children will navigate to landing page
+      e.stopPropagation();
       setIsMinimized(false);
-      navigate('/'); // Navigate back to home to see the full 3D view
+      navigate('/');
+      return;
     }
   };
   
   // Handle touch events specifically for mobile
   const handleSceneTouch = (e) => {
-    // Only handle touches on the container itself, not on child elements
-    if (e.target === e.currentTarget && isMinimized) {
-      e.stopPropagation(); // Prevent event from bubbling
+    if (isMinimized) {
+      // When minimized, any touch on the scene or its children will navigate to landing page
+      e.stopPropagation();
+      e.preventDefault();
       setIsMinimized(false);
-      navigate('/'); // Navigate back to home to see the full 3D view
+      navigate('/');
+      return;
     }
   };
 

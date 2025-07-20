@@ -86,22 +86,22 @@ const MobileEnhancer = () => {
         
         // Add click and touch listeners that navigate to the home page
         const clickHandler = (e) => {
-          // Only handle clicks on the container itself, not on child elements
-          if (e.target === sceneContainer) {
-            e.stopPropagation();
-            // Use the existing React Router navigation
-            window.location.href = '/';
-          }
+          // Handle clicks anywhere within the minimized 3D model
+          e.stopPropagation();
+          // Use history API instead of direct location change for better compatibility
+          window.history.pushState({}, '', '/');
+          // Dispatch a navigation event to ensure React Router updates
+          window.dispatchEvent(new Event('popstate'));
         };
         
         const touchHandler = (e) => {
-          // Only handle touches on the container itself, not on child elements
-          if (e.target === sceneContainer) {
-            e.stopPropagation();
-            e.preventDefault(); // Prevent default touch behavior
-            // Use the existing React Router navigation
-            window.location.href = '/';
-          }
+          // Handle touches anywhere within the minimized 3D model
+          e.stopPropagation();
+          e.preventDefault(); // Prevent default touch behavior
+          // Use history API instead of direct location change for better compatibility
+          window.history.pushState({}, '', '/');
+          // Dispatch a navigation event to ensure React Router updates
+          window.dispatchEvent(new Event('popstate'));
         };
         
         // Remove existing listeners if they exist
