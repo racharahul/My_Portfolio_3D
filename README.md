@@ -58,6 +58,20 @@ To run the project locally:
 
 ## Recent Updates
 
+### August 2025 Updates
+- Redesigned Home page with a more personal touch:
+  - Implemented a full-width hero section with profile image as background
+  - Added an overlay with gradient for better text readability
+  - Created a prominent "Hey! I'm Rahul" greeting with teal accent
+  - Added a concise tagline describing professional focus
+  - Maintained the call-to-action button within the new design
+- Refined About Me page design:
+  - Removed card-like container for a more seamless integration with the page background
+  - Maintained the two-column layout with profile image and text content
+  - Eliminated borders, box-shadows, and separate background colors
+  - Increased spacing between columns for better visual balance
+  - Preserved all existing content including introduction, philosophy, skills list, and CTA button
+
 ### July 2025 Updates
 - Fixed Vercel build failure (error code 126):
   - Added missing `manifest.json` and `favicon.ico` files to the public directory
@@ -93,6 +107,9 @@ To run the project locally:
 - Redesigned project cards with full-width banner images
 - Added semi-transparent overlay and blend modes to project images for better visual integration
 - Reorganized project content flow for improved readability
+- Updated Projects page to use a uniform "Web Design Highlight" layout for all projects
+- Enhanced "View Code" and "Visit Site" buttons with improved visibility through styling changes
+- Updated project images to display actual project images from the projects folder instead of SVG placeholders
 
 ## Future Plans
 
